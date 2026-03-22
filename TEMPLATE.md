@@ -1,8 +1,8 @@
 # [Number]. [Title]
 
-**Difficulty**: Easy / Medium / Hard
-**Primary Tag**: <!-- e.g. array -->
-**Secondary Tags**: <!-- e.g. hash-table, two-pointers -->
+**Difficulty**: Easy / Medium / Hard<br>
+**Primary Tag**: <!-- e.g. array --><br>
+**Secondary Tags**: <!-- e.g. hash-table, two-pointers --><br>
 **LeetCode Link**: https://leetcode.com/problems/[title-slug]/
 
 ---
@@ -33,7 +33,7 @@
 # solution code here
 ```
 
-**Time Complexity**: O(?)
+**Time Complexity**: O(?)<br>
 **Space Complexity**: O(?)
 
 ---
