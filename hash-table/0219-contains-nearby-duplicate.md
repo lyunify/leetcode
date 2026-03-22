@@ -1,8 +1,8 @@
 # 219. Contains Nearby Duplicate
 
-**Difficulty**: Easy
-**Primary Tag**: hash-table
-**Secondary Tags**: array, sliding-window
+**Difficulty**: Easy<br>
+**Primary Tag**: hash-tabley<br>
+**Secondary Tags**: array, sliding-windowy<br>
 **LeetCode Link**: https://leetcode.com/problems/contains-duplicate-ii/
 
 ---
@@ -47,7 +47,7 @@ class Solution(object):
         return False
 ```
 
-**Time Complexity**: O(n)
+**Time Complexity**: O(n)y<br>
 **Space Complexity**: O(n)
 
 ---
