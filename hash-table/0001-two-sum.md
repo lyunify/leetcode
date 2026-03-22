@@ -1,8 +1,8 @@
 # 1. Two Sum
 
-**Difficulty**: Easy
-**Primary Tag**: hash-table
-**Secondary Tags**: array
+**Difficulty**: Easy<br>
+**Primary Tag**: hash-table<br>
+**Secondary Tags**: array<br>
 **LeetCode Link**: https://leetcode.com/problems/two-sum/
 
 ---
@@ -23,7 +23,7 @@ Given an array of integers `nums` and an integer `target`, return the indices of
 
 ## Key Insight
 
-Use a hash map to store each number and its index as you iterate. For each new number, check if its complement (`target - value`) already exists in the map — if so, you've found the answer in a single pass.
+Use a hash map to store each number and its index as you iterate. For each new number, check if its complement (`target - value`) already exists in the map. If so, you've found the answer in a single pass.
 
 ## Correct Approach
 
@@ -44,8 +44,8 @@ class Solution(object):
             records[value] = index
 ```
 
-**Time Complexity**: O(n)
-**Space Complexity**: O(n)
+**Time Complexity**: O(n)<br>
+**Space Complexity**: O(n)<br>
 
 ---
 
