@@ -19,11 +19,25 @@ Given an array of integers `nums` and an integer `target`, return the indices of
 
 ## My Mistake(s)
 
-<!-- What went wrong during your attempt. Be specific. -->
+### 2026-03-27
+
+- **Used the same index twice.** With a single hash map updated as you scan, you must only accept a complement stored at a different index. Putting `nums[i]` in the map before checking, or initializing everything upfront, can pair an element with itself (invalid when "you may not use the same element twice"). Fix: check first, then store.
+- **Returned values instead of indices.** The problem asks for indices, not the numbers; returning `{nums[i], complement}` or confusing array values with positions is a common slip.
+- **Two-pointer on an unsorted array without care.** Sorting with indices requires tracking original indices (pairs of (value, index)), extra work, and O(n log n). Naive two-pointer on unsorted nums is wrong.
+- **Off-by-one / wrong loop bounds.** Nested brute force (O(n²)) has pitfalls: inner loop must start at `j = i + 1` so you do not reuse the same index.
+- **Map overwrite confusion.** When duplicates exist (e.g. `nums = [3,3], target = 6`), storing value → index and overwriting earlier indices is fine: you only need one prior index for a valid pair, and the unique-solution guarantee handles the rest.
+- **Assumed sorted input or built-in search on values.** Binary search on sorted values does not directly give two distinct indices in the original array unless you carry index metadata.
 
 ## Key Insight
 
 Use a hash map to store each number and its index as you iterate. For each new number, check if its complement (`target - value`) already exists in the map. If so, you've found the answer in a single pass.
+
+### 2026-03-27
+
+- **Complement formulation:** For each index `i`, you need another index `j` with `nums[j] == target - nums[i]` and `j ≠ i`. The hash map answers "have I seen this complement before?" in O(1).
+- **One-pass hash map:** Scan left to right; for each `nums[i]`, if `target - nums[i]` is already in the map, return `[storedIndex, i]`; else store `(nums[i], i)`. Time O(n), space O(n).
+- **Why sorting + two-pointer is secondary:** It works if you preserve original indices, but the map avoids sorting entirely and is the favored linear solution for classic Two Sum.
+- **Problem guarantee:** Exactly one solution exists, so no need to collect all pairs or handle "no answer" on LeetCode.
 
 ## Correct Approach
 
@@ -54,3 +68,4 @@ class Solution(object):
 | Date | Outcome | Notes |
 |------|---------|-------|
 | 2026-03-21 | ✅ | Accepted — 2 ms, beats 57.26% runtime; 12.88 MB, beats 97.57% memory |
+| 2026-03-27 | Solved after review | Self-pairing bug (check before store); returned values not indices; one-pass complement hash map is the canonical O(n) solution |
