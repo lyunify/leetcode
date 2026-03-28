@@ -21,9 +21,24 @@ Given two strings `ransomNote` and `magazine`, return `true` if `ransomNote` can
 
 - Unsure how to track character frequencies efficiently.
 
+### 2026-03-27
+
+- **Confused "substring" with "multiset of letters".** The note does not have to appear as a contiguous substring of magazine; you only need enough copies of each letter. Any order in magazine is fine as long as frequencies cover the note.
+- **Counted the wrong string first (or only one).** Building counts from ransomNote and then "adding from magazine" is error-prone; the robust pattern is inventory from magazine, then consume for ransomNote. Forgetting to decrement / using the wrong sign leads to wrong answers.
+- **Off-by-one or wrong array size for alphabet.** The problem uses lowercase English letters only (a–z), so `int[26]` with index `c - 'a'` is correct; using length 128 or mixing uppercase without normalizing causes silent bugs.
+- **Early exit missing or inverted.** You need `available[idx] < 0` after decrement to fail fast; checking `> 0` before decrement only, or returning true without verifying all letters, are logic slips.
+- **Tried sorting both strings.** Sorting works in spirit but is O(n log n) and easy to mishandle when lengths differ; frequency counting is simpler and O(m + r) with O(1) extra space for 26 letters.
+- **Double-counted or "reused" the same magazine index twice in logic.** Each character in magazine is one tile; the frequency approach enforces "use at most once per occurrence" automatically.
+
 ## Key Insight
 
 Use a hash map to count the frequency of each character in the magazine, then decrement the counts while iterating through the ransom note. If a required character is missing or its count is already zero, return false. Otherwise, return true after processing all characters in the ransom note.
+
+### 2026-03-27
+
+- **Ransom note feasibility is vector inequality on letter counts:** for every letter `c`, `count_note(c) ≤ count_magazine(c)`. Equivalent: magazine's multiset contains the note's multiset (order irrelevant).
+- **One-pass inventory + consumption:** increment counts while scanning magazine, decrement while scanning ransomNote; any negative bucket means "not enough letters left."
+- **Complexity:** Time O(m + r) where m = |magazine|, r = |ransomNote|; Space O(1) with fixed 26 counters.
 
 ## Correct Approach
 
@@ -62,3 +77,4 @@ class Solution(object):
 | Date | Outcome | Notes |
 |------|---------|-------|
 | 2026-03-22 | Solved after review | Unsure how to track character frequencies; used hash map to count magazine chars then decrement for ransom note |
+| 2026-03-27 | Solved after review | Confused substring with multiset; wrong counting order; fixed-26 int array approach; feasibility = vector inequality on letter counts |
