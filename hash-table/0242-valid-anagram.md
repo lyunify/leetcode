@@ -19,6 +19,16 @@ Given two strings `s` and `t`, return `true` if `t` is an anagram of `s`, and `f
 
 ## My Mistake(s)
 
+### 2026-03-27
+
+- **Forgot the length check.** Anagrams must use the same multiset of characters, so `|s| == |t|` is necessary. An early length mismatch should return false immediately.
+- **Used sorting but compared wrong things.** Sorting both strings and comparing works, but mixing up references (only sorting one copy, comparing original to sorted, or using `==` on strings after sort) causes failures. Also O(n log n) vs O(n) counting.
+- **Off-by-one / wrong bucket for `char - 'a'`.** Assuming lowercase English only: index must be `c - 'a'` in [0, 25]. Non-lowercase input in another variant would break a size-26 array without a different map.
+- **Counting only one string.** Building counts from `s` and never reconciling with `t` is wrong — you need equality of frequencies for every character, not "s fits inside t."
+- **Early return on first mismatch in a fragile way.** For the "increment for s, decrement for t" pattern, returning false only when counts go negative is correct only if lengths are equal first; otherwise also ensure all buckets end at zero.
+- **Used `HashMap<Character, Integer>` unnecessarily.** Not a logical error, but overkill when the alphabet is fixed at 26; a plain `int[26]` is simpler and avoids boxing/autoboxing mistakes.
+- **Confused anagram with "same unique letters".** Same set of distinct characters is not enough; multiplicities must match (`"aab"` vs `"abb"` is NOT an anagram).
+
 - Mixed up which dictionary to update and which key to use: wrote `countT[s[i]]` and `countS.get(t[i], 0)` instead of updating `countT` with `t[i]` and reading from `countT` for `t`.
 - Flipped the final check: used `if countS[c] == countT.get(c, 0): return False` instead of `!=`.
 - Did not see `countS[s[i]] = 1 + countS.get(s[i], 0)` as "read old count → add 1 → write back"; the left side is the slot (key = letter), the right side is the new value.
@@ -29,6 +39,13 @@ Given two strings `s` and `t`, return `true` if `t` is an anagram of `s`, and `f
 - Overloaded on names (`letter_s`, `old_count_s`, `i`) until separating: `i` = position, `s[i]` / `letter_s` = character, `countS[...]` = frequency table.
 
 ## Key Insight
+
+### 2026-03-27
+
+- **Formal condition:** s and t are anagrams iff they have identical length and identical per-character frequencies (multiset equality).
+- **Linear-time recipe:** a single `int[26]` — pass over s (increment) and t (decrement) yields all zeros iff anagram; with equal length, any negative midway is impossible.
+- **Alternate view:** sorting both strings to the same canonical form and comparing — correct but O(n log n).
+- **Complexity:** Time O(n); Space O(1) because alphabet size is constant (26).
 
 - Anagram ⟺ same multiset of characters ⟺ same length and same per-letter counts.
 - Build `countS` and `countT` in one pass (same index `i` for `s[i]` and `t[i]`).
@@ -72,3 +89,4 @@ class Solution:
 | Date | Outcome | Notes |
 |------|---------|-------|
 | 2026-03-23 | Solved after review | Mixed up dict/key assignments, flipped != check, confused KeyError on countT[c] |
+| 2026-03-27 | Solved after review | Forgot length check; confused anagram with same unique letters; int[26] approach cleaner than HashMap; multiset equality is the formal condition |
