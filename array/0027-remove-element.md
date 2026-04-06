@@ -58,3 +58,4 @@ class Solution {
 | Date | Outcome | Notes |
 |------|---------|-------|
 | 2026-03-24 | ✅ Solved after review | Confused index vs value, forgot for-loop increment, misunderstood post-increment k++ |
+| 2026-04-05 | ✅ Solved after review | Shrinking from left (O(n²)), extra array by habit, wrong return value, off-by-one on write pointer, overthinking tail cleanup, confused order-agnostic with two-pointer swap approach |
