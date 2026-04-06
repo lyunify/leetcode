@@ -77,3 +77,4 @@ class Solution {
 | Date | Outcome | Notes |
 |------|---------|-------|
 | 2026-03-25 | ✅ Solved after review | Off-by-one on write pointer; slow–fast invariant and empty-array edge case clicked during review |
+| 2026-04-05 | ✅ Solved after review | HashSet by habit, off-by-one on write init/return, comparing to nums[write-1] instead of nums[i-1], O(n²) shifting instinct, worrying about tail values past k |
