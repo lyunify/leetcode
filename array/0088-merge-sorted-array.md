@@ -65,3 +65,4 @@ class Solution {
 | Date | Outcome | Notes |
 |------|---------|-------|
 | 2026-03-24 | ✅ Solved after review | Tried merge-from-front (destructive overwrite), missed three-pointer back-to-front trick |
+| 2026-04-05 | ✅ Solved after review | Left-to-right overwrite, extra array by habit, loop condition bugs (missing nums2 drain), index confusion (m-1 vs m+n-1), redundant post-loop copy, tie-breaking anxiety |
