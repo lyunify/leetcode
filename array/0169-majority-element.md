@@ -24,12 +24,18 @@ Given an array of size n, return the majority element — the element that appea
 - Reached for HashMap first without internalizing why the sorted median works, so the idea didn't stick for timed practice.
 - Didn't connect the definition to the O(1) space follow-up (Boyer–Moore / pairing) until review.
 - In-place sort mutates `nums`; fine on LeetCode but worth noting for real APIs.
+- Ignoring the majority constraint: trying to count every frequency or use a HashMap when the problem only needs one value that appears > ⌊n/2⌋ times — heavier than necessary.
+- Wrong index after sort: using `n/2 - 1` or `(n-1)/2` inconsistently without remembering that `n/2` always lands inside the majority block in a 0-based array.
+- Forgetting the problem guarantee: doubting whether the middle element is always the answer; the statement guarantees a majority element exists, which is what makes the median-after-sort trick valid.
+- Off-by-one in counting: confusing "more than half" (> n/2) with "at least half" (≥ n/2); strictly greater than n/2 is what makes the median placement reliable.
 
 ## Key Insight
 
 - More than half ⇒ covers the middle index after sort: the majority forms one long contiguous segment, so `n/2` lies in that segment — no second scan to count runs.
 - The argument is **positional** (geometry of sorted order), not just "highest frequency."
-- Pair-cancellation (voting) is the same condition in disguise: every non-majority element can be paired off with a majority element, leaving at least one majority element standing.
+- Median intuition: with a true majority, the median of the multiset is that element; sorting makes that position `n/2` in a 0-indexed array.
+- Trade-off: sort is simple (O(n log n), O(1) extra space) but mutates input; Boyer–Moore gives O(n) time and O(1) space without relying on sort.
+- Pair-cancellation (voting) is the same condition in disguise: every non-majority element can be paired off with a majority element, leaving at least one majority element standing — the standard O(n) follow-up.
 
 ## Correct Approach
 
@@ -62,3 +68,4 @@ class Solution {
 | Date | Outcome | Notes |
 |------|---------|-------|
 | 2026-03-25 | ✅ Solved after review | Confused majority vs mode; sorted-median insight clicked during review; Boyer–Moore connection made after |
+| 2026-04-06 | ✅ Solved after review | Reached for HashMap; wrong sort index; forgot problem guarantee; off-by-one on "more than half" definition |
