@@ -19,17 +19,20 @@ Given an integer array `nums`, rotate the array to the right by `k` steps, where
 
 ## My Mistake(s)
 
-- **Forgot `k %= n`**: using raw `k` causes out-of-bounds or wrong offsets when `k >= n`; rotating by `n` is identity.
+- **Forgot `k %= n`**: using raw `k` causes out-of-bounds or wrong offsets when `k >= n`; rotating by `n` is identity; for `k = 0` the array must stay unchanged.
 - **Wrong index formula for "right by k"**: confused where to read vs. where to write — for "move each `nums[i]` to the right by k", the destination is `(i + k) % n`, not `(i - k + n) % n` (that is the left-shift mapping).
 - **Used extra space when follow-up asks O(1)**: a second array is O(n) space; the interview follow-up is the triple-reverse in-place (reverse all → reverse first k → reverse rest) after normalizing k.
 - **Off-by-one with "last k elements"**: another valid formulation moves `nums[n-k..n-1]` to the front; mixing inclusive/exclusive ranges with indices is easy to get wrong.
+- **Off-by-one on the target index**: using `i + k` without `% n`, or using `n/2`-style indices for a general k.
+- **Stopped at "it works" on space**: solved with an extra array without knowing the O(1) follow-up (triple reverse or cycle with GCD handling).
 
 ## Key Insight
 
 - Rotation is a permutation: index `i` goes to `(i + k) mod n` for a right rotation by `k` on `[0..n-1]`.
-- **k % n**: only the remainder matters — think "effective steps" after stripping full cycles.
-- **Auxiliary array recipe**: `rotated[(i + k) % n] = nums[i]` for all `i`, then copy back — O(n) time, O(n) space.
-- **In-place upgrade (triple reverse)**: `reverse(0, n-1)` → `reverse(0, k-1)` → `reverse(k, n-1)` achieves the same result in O(1) space when `k` is normalized to `[0, n)`.
+- **Normalization**: only `k % n` matters; `k` can be huge but the effective shift repeats every `n` steps.
+- **Direct placement**: `rotated[(i + k) % n] = nums[i]` for all `i` — one pass, no ambiguity — O(n) time, O(n) space.
+- **Space–time trade-off**: the auxiliary array approach is clear and hard to get wrong; in-place solutions swap memory for reverse/pointer reasoning.
+- **In-place upgrade (triple reverse)**: `reverse(0, n-1)` → `reverse(0, k-1)` → `reverse(k, n-1)` achieves the same result in O(1) space when `k` is normalized to `[0, n)` — worth pairing with the O(n) version.
 
 ## Correct Approach
 
@@ -86,3 +89,4 @@ class Solution {
 | Date | Outcome | Notes |
 |------|---------|-------|
 | 2026-04-01 | ✅ Solved after review | Forgot k%=n; confused read/write index direction; used O(n) space instead of triple-reverse |
+| 2026-04-06 | ✅ Solved after review | Forgot k%=n; mixed left/right rotation formula; off-by-one on target index; didn't know O(1) follow-up |
