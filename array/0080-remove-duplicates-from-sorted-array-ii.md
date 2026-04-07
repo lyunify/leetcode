@@ -23,12 +23,18 @@ Given a sorted integer array `nums`, remove duplicates in-place so each value ap
 - Compared with the wrong index: checking only `nums[i]` vs `nums[k-1]` does not detect a third duplicate in one pass; the trick is to compare against `nums[k - 2]` (two slots before the write head).
 - Confused "two pointers" with "counting": a frequency map is O(n) extra space; the intended approach is in-place with one slow (`k`) and one fast (`i`) index.
 - Off-by-one on the loop start: the pattern assumes the first two elements are always kept, so `i` must start at 2, not 0 or 1, after the small-n guard.
+- Recycling the problem-26 trick: using `nums[i] != nums[i - 1]` enforces at most one copy, not two — the check must be against the output prefix, not the input scan.
+- Wrong anchor for the third copy: checking `nums[i]` against `nums[i - 1]` only; two equal neighbors can still be the second allowed occurrence — the failure mode is the third in a row, which aligns with `nums[k - 2]`.
+- Mixing i and k carelessly: writing `nums[i] != nums[i - 2]` without keeping straight "two back in the input" vs "two back in the written prefix"; the safe test is always against `nums[k - 2]` once `k >= 2`.
+- Resetting the run on every unequal neighbor: treating each `!=` as a brand-new distinct value without remembering two copies are still allowed — the rule is "no third in a contiguous run," not "no repeat."
 
 ## Key Insight
 
 - Sorted ⇒ duplicates are contiguous, so "allowed twice per value" can be enforced by only looking at the last two accepted positions in the compacted prefix.
 - Invariant: `nums[0..k-1]` is always valid; for `i >= 2`, if `nums[i] != nums[k-2]`, then `nums[i]` is either a new value or the second copy of the current run — safe to write at `k` and increment `k`.
 - Why `k - 2`: if it equals `nums[i]` while the run already occupies `k-2` and `k-1`, accepting `nums[i]` would create three equal values in a row; skip without writing.
+- First two slots are free: with `k = 2`, the initial prefix `nums[0]` and `nums[1]` are always valid — every value appears at most twice in a block of length 2.
+- General pattern: "at most m copies" uses comparison m positions back in the written array (here m = 2 → `k - 2`).
 - Time O(n), space O(1): one pass, only index variables — same family as "Remove Duplicates I" but the "at most two" rule changes the compare offset from `k-1` to `k-2`.
 
 ## Correct Approach
@@ -71,3 +77,4 @@ class Solution {
 | Date | Outcome | Notes |
 |------|---------|-------|
 | 2026-03-31 | ✅ | Accepted (100% runtime); mistakes on small-n guard, wrong compare index, loop start |
+| 2026-04-06 | ✅ Solved after review | Recycled problem-26 trick (i-1 instead of k-2); mixed i vs k indices; forgot short-array edge case; wrong anchor for third-copy detection |
