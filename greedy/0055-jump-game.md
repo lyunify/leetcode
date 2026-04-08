@@ -65,3 +65,4 @@ class Solution {
 | Date | Outcome | Notes |
 |------|---------|-------|
 | 2026-04-02 | Solved after review | Needed to recall greedy frontier trick; off-by-one and gap-check pitfalls noted |
+| 2026-04-08 | Solved after review | DP overkill again; reconfirmed frontier invariant and gap check; early exit on maxReach >= lastIndex |
