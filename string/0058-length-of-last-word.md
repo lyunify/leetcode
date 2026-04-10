@@ -70,3 +70,4 @@ class Solution {
 | Date | Outcome | Notes |
 |------|---------|-------|
 | 2026-03-26 | Solved after review | No plan going in; confused by trailing/multiple spaces; key fix: scan right-to-left after trim |
+| 2026-04-09 | Solved after review | Forgot to handle trailing spaces; used split(" ") initially causing empty-token bugs; off-by-one starting at s.length() instead of s.length()-1; broke on first space without checking if any letters counted yet; didn't test all-spaces case |
