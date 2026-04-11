@@ -73,3 +73,4 @@ class Solution {
 | Date | Outcome | Notes |
 |------|---------|-------|
 | 2026-03-31 | ✅ | Accepted; mistakes on empty-needle rule, off-by-one bound, and i vs i+j indexing |
+| 2026-04-10 | ✅ | Solved after review; repeated mistakes: empty-needle edge case, i <= n-m bound, bounds on inner loop, verifying j == m, and missing small edge-case tests |
