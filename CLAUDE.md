@@ -45,6 +45,6 @@ Every time the same problem is practiced, add a new row to the **Practice Histor
 
 ## Available Tag Folders
 
-`array` · `hash-table` · `two-pointers` · `binary-search` · `dynamic-programming` · `tree` · `graph` · `backtracking` · `greedy` · `stack` · `queue` · `linked-list` · `string` · `math`
+`array` · `hash-table` · `two-pointers` · `binary-search` · `sliding-window` · `dynamic-programming` · `tree` · `graph` · `backtracking` · `greedy` · `stack` · `queue` · `linked-list` · `string` · `math`
 
 If a problem's primary tag is not in this list, create the new folder and add it here.
