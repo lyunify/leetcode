@@ -31,6 +31,14 @@ Given two strings `s` and `t`, determine if they are isomorphic — every charac
 - **Compared lengths carelessly.** Forgetting the `s.length() != t.length()` early-exit can cause index-out-of-bounds or subtle bugs in variations.
 - **Reset or overwrote maps incorrectly.** Clearing maps mid-loop or using "last wins" semantics breaks the rule that earlier position bindings are irrevocable.
 
+### 2026-04-14
+
+- **Only checked one direction (s → t)** — misses collisions where two different s chars map to the same t char; both forward and reverse maps are required.
+- **Used set-based check ignoring position consistency** — isomorphism is about consistent per-index mapping, not whether the same characters appear globally.
+- **Forgot to validate equal length before scanning** — can cause index errors in edge cases.
+- **Overcomplicated with substring patterns** — simple per-character mapping with two maps is sufficient.
+- **Mixed up char indexing or updated mappings after a mismatch** — once a contradiction is detected, return immediately; "last wins" overwrites break earlier irrevocable bindings.
+
 ## Key Insight
 
 - **What "isomorphic" means**: iso- (same) + morph (shape) — same repetition structure; rename letters in `s` so every copy of one letter becomes one fixed letter in `t`, and two different letters in `s` cannot both map to the same letter in `t` (pattern `XYY` ↔ `egg` ↔ `add`).
@@ -42,6 +50,13 @@ Given two strings `s` and `t`, determine if they are isomorphic — every charac
 - **Isomorphism = bijection between characters at corresponding positions.** Build a partial bijection left-to-right: each s-character maps to exactly one t-character, and each t-character comes from exactly one s-character. Two hash maps make contradiction checks O(1) per step.
 - **Same pattern as Word Pattern (290).** Replace "character ↔ word" with "character ↔ character"; the logic is identical — symmetric maps, single pass, reject on any clash.
 - **Complexity:** Time O(n); Space O(σ) for distinct characters (≤ n), which is O(n) worst case.
+
+### 2026-04-14
+
+- **Isomorphism requires a bijection:** `s[i]` must always map to the same `t[i]`, and no two different s chars may map to the same t char — enforce with two maps (s→t and t→s).
+- **Two-map scan:** at each index, if an existing mapping conflicts with the current pair, return false immediately; otherwise record both directions.
+- **Fixed-size arrays for ASCII:** since inputs are ASCII, `int[128]` (or `int[256]`) arrays work as maps and are faster than hash maps — O(1) space for fixed alphabets.
+- **Complexity:** Time O(n); Space O(1) for fixed alphabet size.
 
 ## Correct Approach
 
@@ -81,3 +96,4 @@ class Solution:
 |------|---------|-------|
 | 2026-03-23 | Solved after review | Misplaced parentheses broke boolean check; omitted return True; needed two maps for bijection |
 | 2026-03-27 | Solved after review | One-direction map misses collisions from the other side; multiset intuition is wrong; two-map bijection is identical pattern to Word Pattern 290 |
+| 2026-04-14 | Solved after review | One-direction map misses inverse collisions; set-based check wrong; bijection enforced with two maps (s→t and t→s); fixed int[128] arrays for O(1) space |
