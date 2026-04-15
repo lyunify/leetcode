@@ -30,6 +30,14 @@ Given two strings `ransomNote` and `magazine`, return `true` if `ransomNote` can
 - **Tried sorting both strings.** Sorting works in spirit but is O(n log n) and easy to mishandle when lengths differ; frequency counting is simpler and O(m + r) with O(1) extra space for 26 letters.
 - **Double-counted or "reused" the same magazine index twice in logic.** Each character in magazine is one tile; the frequency approach enforces "use at most once per occurrence" automatically.
 
+### 2026-04-14
+
+- **Used `contains`/`indexOf` with string deletion** — turns every character lookup into O(n), making the full solution O(n²) and risking TLE.
+- **Treated it as set membership instead of multiset counts** — missed that duplicate characters must be handled; "does magazine contain this letter?" is wrong; "does magazine have enough copies?" is correct.
+- **Built counts from ransomNote but compared incorrectly** — mixing up which side to decrement or forgetting to compare against magazine counts leads to wrong results.
+- **Skipped early exit on negative count** — not returning immediately when `available[idx] < 0` leads to unnecessary work and potential bugs.
+- **Overcomplicated character handling** — assumed uppercase or arbitrary Unicode when the constraint is strictly lowercase a–z, making a fixed `int[26]` sufficient.
+
 ## Key Insight
 
 Use a hash map to count the frequency of each character in the magazine, then decrement the counts while iterating through the ransom note. If a required character is missing or its count is already zero, return false. Otherwise, return true after processing all characters in the ransom note.
@@ -39,6 +47,13 @@ Use a hash map to count the frequency of each character in the magazine, then de
 - **Ransom note feasibility is vector inequality on letter counts:** for every letter `c`, `count_note(c) ≤ count_magazine(c)`. Equivalent: magazine's multiset contains the note's multiset (order irrelevant).
 - **One-pass inventory + consumption:** increment counts while scanning magazine, decrement while scanning ransomNote; any negative bucket means "not enough letters left."
 - **Complexity:** Time O(m + r) where m = |magazine|, r = |ransomNote|; Space O(1) with fixed 26 counters.
+
+### 2026-04-14
+
+- **Frequency counting is the core pattern:** constructibility iff `count_note(c) ≤ count_magazine(c)` for every character `c`.
+- **Fixed-size `int[26]` over a map:** since inputs are lowercase a–z only, a 26-element array is simpler and faster than a hash map — index with `c - 'a'`.
+- **Inventory then consume:** count up magazine letters, then decrement for each ransom note letter; any bucket going negative means "not enough of that letter."
+- **Early exit on negative count** keeps it efficient in practice; worst case is still O(m + n) with O(1) space.
 
 ## Correct Approach
 
@@ -78,3 +93,4 @@ class Solution(object):
 |------|---------|-------|
 | 2026-03-22 | Solved after review | Unsure how to track character frequencies; used hash map to count magazine chars then decrement for ransom note |
 | 2026-03-27 | Solved after review | Confused substring with multiset; wrong counting order; fixed-26 int array approach; feasibility = vector inequality on letter counts |
+| 2026-04-14 | Solved after review | Used contains/indexOf O(n²) approach; missed multiset vs set distinction; reinforced int[26] fixed-array pattern with early exit |
