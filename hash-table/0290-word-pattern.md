@@ -30,6 +30,14 @@ Given a `pattern` string and a string `s` of space-separated words, return `true
 - **Wrong split API.** Using `split(" ")` without understanding edge-case behavior: leading/trailing spaces can produce extra empty strings, causing count checks to fail.
 - **Treating it as substring or order-only.** The problem is bijection between positions, not "set of words matches set of letters." Order matters; zip index `i` of pattern with word `i`.
 
+### 2026-04-14
+
+- **Forgot to check `pattern.length() == words.length`** — mismatched counts cause out-of-bounds or silent false positives.
+- **Used only one map (char → word)** — misses the case where two different pattern letters map to the same word; both directions are required.
+- **Split on `" "` and got empty tokens** — trailing or multiple spaces produce extra empty strings; `split("\\s+")` is safer.
+- **Compared strings with `==` instead of `.equals()`** — relies on interning, which is not guaranteed.
+- **Updated the map after detecting a mismatch** — once a conflict is found, return immediately without overwriting the original binding.
+
 ## Key Insight
 
 Use two hash maps to enforce a one-to-one mapping in both directions: one maps each pattern character to its word, and another maps each word back to its pattern character. If any existing mapping is inconsistent, return false immediately.
@@ -39,6 +47,13 @@ Use two hash maps to enforce a one-to-one mapping in both directions: one maps e
 - **Same structure as isomorphic strings.** Letters in pattern play the role of characters in `s`, and words play the role of characters in `t`. Isomorphism = injective + consistent in both directions.
 - **One pass is enough.** Scan once with two hash maps. At each index, if an existing binding conflicts, return false; otherwise record both directions.
 - **Complexity:** Time O(n + m) for splitting and scanning; Space O(n) for distinct chars/words.
+
+### 2026-04-14
+
+- **Same bijection as isomorphic strings**, but char ↔ word instead of char ↔ char: two maps (`char→word` and `word→char`), scan in parallel, reject on any conflict.
+- **Length parity is the first guard:** `pattern.length() != words.length` is an immediate false; no bijection is possible.
+- **Split carefully:** use `split("\\s+")` or trust the problem's single-space guarantee with `split(" ")`; always verify token count matches pattern length.
+- **Complexity:** Time O(n + m) where n = pattern length, m = total chars in s; Space O(W) for distinct words/chars.
 
 ## Correct Approach
 
@@ -87,3 +102,4 @@ class Solution(object):
 |------|---------|-------|
 | 2026-03-22 | Solved after review | Unclear on bijection concept; used two hash maps to enforce one-to-one mapping in both directions |
 | 2026-03-27 | Solved after review | Forgot reverse map; used == for strings; missed length parity check; isomorphic-strings insight solidified |
+| 2026-04-14 | Solved after review | Missed length parity guard; one-map only misses inverse collisions; split(" ") edge cases; use .equals() not ==; two-map bijection same as isomorphic strings |
