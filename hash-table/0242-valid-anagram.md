@@ -19,6 +19,12 @@ Given two strings `s` and `t`, return `true` if `t` is an anagram of `s`, and `f
 
 ## My Mistake(s)
 
+### 2026-04-15
+
+- **Delayed the length check.** Forgetting or postponing `s.length() == t.length()` can incorrectly accept cases where `t` is a strict superset of `s`.
+- **Used a heavier approach (sorting or HashMap) unnecessarily.** The constraint of lowercase English letters allows a constant-size `int[26]` array — sorting is O(n log n) and a map adds boxing overhead.
+- **Missed the early-negative guard.** Returning false as soon as any count goes negative would catch non-anagrams sooner and simplifies correctness reasoning.
+
 ### 2026-03-27
 
 - **Forgot the length check.** Anagrams must use the same multiset of characters, so `|s| == |t|` is necessary. An early length mismatch should return false immediately.
@@ -39,6 +45,12 @@ Given two strings `s` and `t`, return `true` if `t` is an anagram of `s`, and `f
 - Overloaded on names (`letter_s`, `old_count_s`, `i`) until separating: `i` = position, `s[i]` / `letter_s` = character, `countS[...]` = frequency table.
 
 ## Key Insight
+
+### 2026-04-15
+
+- **Invariant is frequency, not position.** An anagram means the same multiset of letters — matching character frequencies, not positions.
+- **`int[26]` is the ideal structure here.** For lowercase English letters, count up while scanning `s`, subtract while scanning `t`, and fail early if any count goes negative.
+- **Length check upfront.** `s.length() == t.length()` prevents wasted work and false positives.
 
 ### 2026-03-27
 
@@ -90,3 +102,4 @@ class Solution:
 |------|---------|-------|
 | 2026-03-23 | Solved after review | Mixed up dict/key assignments, flipped != check, confused KeyError on countT[c] |
 | 2026-03-27 | Solved after review | Forgot length check; confused anagram with same unique letters; int[26] approach cleaner than HashMap; multiset equality is the formal condition |
+| 2026-04-15 | Solved after review | Delayed length check; used sorting/map instead of int[26]; missed early-negative guard |
