@@ -68,3 +68,4 @@ class Solution {
 | 2026-03-30 | Solved after review | Missed the sort-then-compare-extremes insight; incomplete complexity analysis |
 | 2026-04-09 | Solved after review | Forgot to guard strs.length == 0; assumed first string non-empty and caused charAt exception; off-by-one in substring boundaries; compared beyond shortest string causing IndexOutOfBoundsException; didn't test ["","b"] / ["flower","flow","flight"] / ["dog","racecar","car"] early enough |
 | 2026-07-23 | Solved after review | Used Trie approach (insert all words, then walk trie tracking common prefix length) |
+| 2026-07-23 | Solved after review | Used iterative prefix-shrinking approach: start with strs[0] as prefix, compare char-by-char against each string and truncate; cleaner and O(n·L) |
