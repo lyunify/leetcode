@@ -69,3 +69,4 @@ class Solution {
 |------|---------|-------|
 | 2026-03-25 | ✅ Solved after review | Confused majority vs mode; sorted-median insight clicked during review; Boyer–Moore connection made after |
 | 2026-04-06 | ✅ Solved after review | Reached for HashMap; wrong sort index; forgot problem guarantee; off-by-one on "more than half" definition |
+| 2026-07-25 | Solved after review | Used HashMap approach; optimal is Boyer–Moore O(n)/O(1) |
