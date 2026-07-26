@@ -78,3 +78,4 @@ class Solution {
 |------|---------|-------|
 | 2026-03-31 | ✅ | Accepted (100% runtime); mistakes on small-n guard, wrong compare index, loop start |
 | 2026-04-06 | ✅ Solved after review | Recycled problem-26 trick (i-1 instead of k-2); mixed i vs k indices; forgot short-array edge case; wrong anchor for third-copy detection |
+| 2026-07-26 | Solved after review | Used count-based approach (track consecutive run length, write if count <= 2) instead of k-2 anchor |
