@@ -79,3 +79,4 @@ class Solution {
 | Date | Outcome | Notes |
 |------|---------|-------|
 | 2026-04-08 | ✅ | Solved after review — key insight: subtract s[i] when it is less than s[i+1]; loop to length-2 then add last char |
+| 2026-07-25 | Solved after review | |
