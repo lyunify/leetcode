@@ -90,3 +90,4 @@ class Solution {
 |------|---------|-------|
 | 2026-04-01 | ✅ Solved after review | Forgot k%=n; confused read/write index direction; used O(n) space instead of triple-reverse |
 | 2026-04-06 | ✅ Solved after review | Forgot k%=n; mixed left/right rotation formula; off-by-one on target index; didn't know O(1) follow-up |
+| 2026-07-26 | ✅ Accepted | 0 ms, beats 100% — triple-reverse O(1) space, clean implementation |
