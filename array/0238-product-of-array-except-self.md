@@ -67,3 +67,4 @@ class Solution {
 | Date | Outcome | Notes |
 |------|---------|-------|
 | 2026-04-08 | ✅ | Solved after review — remembered prefix product split; missed the O(1) space optimization initially |
+| 2026-07-27 | ✅ Accepted | 2 ms, beats 93.95% — right-to-left pass first (store suffix into ans), then left-to-right pass folds in prefix; same O(1) extra space |
