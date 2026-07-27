@@ -73,3 +73,4 @@ class Solution {
 | Date | Outcome | Notes |
 |------|---------|-------|
 | 2026-04-08 | Solved after review | Applied Stock I logic; needed greedy insight that summing all positive diffs = optimal |
+| 2026-07-26 | ✅ Accepted | 0 ms, beats 100% — clean greedy: sum all positive adjacent diffs in one pass, no anchor variable needed |
