@@ -72,3 +72,4 @@ class Solution {
 |------|---------|-------|
 | 2026-03-26 | Solved after review | Fell into global-max-minus-global-min trap; key fix: anchor on sell day and track prefix minimum |
 | 2026-04-07 | Solved after review | Mistakes: O(n²) brute force, updating min after profit, wrong mental model for prefix min, returning negative profit, overcomplicating with multi-state DP; key fix: one-pass invariant with minPriceSoFar and maxProfit — each day is a candidate sell day, best buy is the prefix minimum |
+| 2026-07-26 | ✅ Accepted | 1 ms, beats 99.94% — used two-pointer variant (l=buy, r=sell): if prices[r] < prices[l] slide l=r, else update maxProfit; same O(n)/O(1) complexity |
