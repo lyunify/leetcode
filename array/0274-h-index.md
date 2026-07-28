@@ -68,3 +68,4 @@ class Solution {
 | Date | Outcome | Notes |
 |------|---------|-------|
 | 2026-04-03 | ✅ | Accepted, 0 ms (beats 100%), 43.19 MB (beats 93.13%). Bucket counting approach. |
+| 2026-07-27 | ✅ Accepted | 6 ms, beats 28.91% — used sort + linear scan (citations[i] >= h where h = n-i); correct but O(n log n), not the O(n) bucket approach |
