@@ -60,3 +60,4 @@ class Solution {
 | Date | Outcome | Notes |
 |------|---------|-------|
 | 2026-07-28 | ✅ Accepted | 1 ms, beats 99.94% — right-to-left greedy, tracking lastPosition |
+| 2026-07-28 | ✅ Accepted | 1 ms, beats 99.94% — same approach, second run to confirm |
