@@ -61,3 +61,4 @@ class Solution {
 | Date | Outcome | Notes |
 |------|---------|-------|
 | 2026-04-10 | Solved after review | split(" ") empty-token bug; forgot trim(); reversed chars not words; trailing space from appending after every word; missed " hello world " and "a good   example" test cases |
+| 2026-07-28 | ✅ | Accepted, 5 ms runtime (beats 84.49%), 44.08 MB memory (beats 87.39%). Used StringBuilder + trim() instead of string concatenation. |
