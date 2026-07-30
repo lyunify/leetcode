@@ -68,3 +68,4 @@ class Solution {
 | Date | Outcome | Notes |
 |------|---------|-------|
 | 2026-04-11 | ✅ Solved after review | Mixed up 0-based vs 1-based indexing; clarified two-pointer direction rules |
+| 2026-07-30 | ✅ | Clean two-pointer solve, no mistakes — 2ms, beats 95.57% |

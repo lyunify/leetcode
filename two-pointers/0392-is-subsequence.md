@@ -65,3 +65,4 @@ class Solution {
 | Date | Outcome | Notes |
 |------|---------|-------|
 | 2026-04-10 | ✅ | Solved after review; mistakes on subsequence vs substring, always advancing j, checking i == s.length(), and empty-s edge case |
+| 2026-07-29 | ✅ | Clean two-pointer solve, no mistakes — 2ms, beats 73.79% |
