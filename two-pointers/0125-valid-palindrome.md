@@ -69,3 +69,4 @@ class Solution {
 | Date | Outcome | Notes |
 |------|---------|-------|
 | 2026-04-10 | ✅ | Solved after review; mistakes on ignoring non-alphanumerics, case-insensitivity, start <= end condition, empty-string edge case, and replaceAll space cost |
+| 2026-07-29 | ✅ | Solved in-place with two-pointer scan skipping non-alphanumerics via `alphaNum` helper (no `replaceAll`) — 2ms, beats 99.33% |
