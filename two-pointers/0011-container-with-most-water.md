@@ -70,3 +70,4 @@ class Solution {
 | Date | Outcome | Notes |
 |------|---------|-------|
 | 2026-04-11 | ✅ Solved after review | Was moving the taller pointer; clarified the greedy argument for advancing the shorter side |
+| 2026-07-30 | ✅ | Clean two-pointer solve, no mistakes |
