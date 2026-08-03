@@ -75,3 +75,4 @@ class Solution(object):
 | 2026-03-21 | ✅ | Accepted — 20 ms, beats 99.22% runtime; 23.81 MB, beats 89.70% memory |
 | 2026-03-27 | Solved after review | Confused k semantics; used seen-set instead of index map; last-index approach is key — nearest occurrence is always the closest, so older ones never help |
 | 2026-04-16 | Solved after review | Overcomplicated with nested loops / storing all indices; only most recent index needed; must update lastIndex after checking or future checks use stale position |
+| 2026-08-03 | TLE (68/69) | Brute-force nested loop (O(nk)) timed out on large k; need hashset/hashmap for O(n) last-index lookup instead of scanning the window |
