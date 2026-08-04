@@ -69,3 +69,4 @@ class Solution {
 | Date | Outcome | Notes |
 |------|---------|-------|
 | 2026-04-12 | ✅ Solved after review | Used `if` instead of `while`; off-by-one in window length; removed wrong character when shrinking |
+| 2026-08-03 | ✅ | Accepted — 66 ms, beats 10.19% runtime; 47.92 MB, beats 5.23% memory. Clean sliding window with HashSet, no mistakes this time |
