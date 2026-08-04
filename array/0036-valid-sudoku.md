@@ -79,3 +79,4 @@ class Solution {
 | Date | Outcome | Notes |
 |------|---------|-------|
 | 2026-04-12 | ✅ Solved after review | Wrong box index formula; forgot to skip '.'; missed sub-box constraint; reused same set instance |
+| 2026-08-03 | ✅ | Accepted — 8 ms, beats 27.67% runtime; 46.87 MB, beats 28.32% memory. Used `Map<Integer, Set<Character>>` for rows/cols and a string key `"r/3,c/3"` for squares instead of fixed-size arrays; same idea, no mistakes this time |
