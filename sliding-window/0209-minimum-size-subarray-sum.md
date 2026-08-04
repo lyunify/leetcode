@@ -71,3 +71,4 @@ class Solution {
 | Date | Outcome | Notes |
 |------|---------|-------|
 | 2026-04-12 | ✅ Solved after review | Used `if` instead of `while` for shrinking; off-by-one in window length; updated minLen after moving left |
+| 2026-08-03 | ✅ | Accepted — 1 ms, beats 99.92% runtime; 69.31 MB, beats 22.52% memory. Clean sliding window, no mistakes this time |
